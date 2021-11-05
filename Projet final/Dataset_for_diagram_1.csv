@@ -1,0 +1,5 @@
+intervales_ages,Asthmatique_femme_Non,Asthmatique_femme_Oui,Asthmatique_homme_Non,Asthmatique_homme_Oui,Cardiaque_femme_Non,Cardiaque_femme_Oui,Cardiaque_homme_Non,Cardiaque_homme_Oui,Diabete_femme_Non,Diabete_femme_Oui,Diabete_homme_Non,Diabete_homme_Oui,Ir_femme_Non,Ir_femme_Oui,Ir_homme_Non,Ir_homme_Oui,Tension_femme_Non,Tension_femme_Oui,Tension_homme_Non,Tension_homme_Oui
+<=18,0,1,1,0,0,0,0,0,2,1,0,0,0,0,0,0,0,1,1,0
+18-25,2,0,0,1,0,0,0,0,3,2,7,1,0,1,0,0,6,4,4,4
+25-45,0,2,0,1,1,0,0,0,3,3,3,3,0,0,0,0,2,1,4,2
+45-70,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0
