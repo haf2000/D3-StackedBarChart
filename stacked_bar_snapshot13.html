@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>D3 Example</title>
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <script>
+
+        function render(data){
+        
+        var nested = d3.nest()
+          .key(function (d){ return d.country; })
+          .key(function (d){ return d.religion; })
+          .entries(data);
+
+        d3.select("body").append("pre")
+          .text(JSON.stringify(nested, null, 2));
+      }
+
+      function type(d){
+        d.population = +d.population;
+        return d;
+      }
+
+
+      d3.csv("https://raw.githubusercontent.com/curran/screencasts/gh-pages/splittingCharts/examples/code/snapshot13/religionByCountryTop5.csv", type, render);
+
+    </script>
+  </body>
+</html>

@@ -4,37 +4,15 @@
     <meta charset="utf-8">
     <title>D3 Example</title>
   <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <style>
-    
-      .axis text {
-        font-family: 'Open Sans', sans-serif;
-        font-size: 16pt;
-      }
-      .axis .label {
-        font-size: 20pt;
-      }
-
-      .axis path, .axis line {
-        fill: none;
-        stroke: #000;
-        shape-rendering: crispEdges;
-      }
-
-      .x.axis text {
-        font-size: 10pt;
-      }
-
-    </style>
   </head>
   <body>
     <script>
-      var outerWidth = 500;
+var outerWidth = 500;
       var outerHeight = 250;
       var margin = { left: 90, top: 30, right: 30, bottom: 40 };
       var barPadding = 0.2;
 
-      var xColumn = "religion";
+      var xColumn = "region";
       var yColumn = "population";
       var colorColumn = "religion";
 
@@ -71,31 +49,33 @@
 
       function render(data){
 
-        xScale.domain(       data.map( function (d){ return d[xColumn]; }));
-        yScale.domain([0, d3.max(data, function (d){ return d[yColumn]; })]);
         colorScale.domain(data.map(function (d){ return d[colorColumn]; }));
 
-        xAxisG
-          .call(xAxis)
-          .selectAll("text")  
-          .attr("dx", "-.8em")
-          .attr("dy", "1em")
-          .attr("transform", "rotate(-20)" );
+        var stack = d3.layout.stack()
+          .y(function (d){ return d[yColumn]; })
+          .values(function (d){ return [d]; });
 
+        var stacked = stack(data);
+
+        xScale.domain(stacked.map(function (d){ return d[xColumn]; }));
+        yScale.domain([0, d3.max(stacked, function (d){ return d.y0 + d.y; })]);
+
+        xAxisG.call(xAxis);
         yAxisG.call(yAxis);
 
-        var bars = g.selectAll("rect").data(data);
+        var bars = g.selectAll("rect").data(stacked);
         bars.enter().append("rect")
           .attr("width", xScale.rangeBand());
         bars
           .attr("x", function (d){ return xScale(d[xColumn]); })
-          .attr("y", function (d){ return yScale(d[yColumn]); })
-          .attr("height", function (d){ return innerHeight - yScale(d[yColumn]); })
+          .attr("y", function (d){ return yScale(d.y0 + d.y); })
+          .attr("height", function (d){ return innerHeight - yScale(d.y); })
           .attr("fill", function (d){ return colorScale(d[colorColumn]); });
         bars.exit().remove();
       }
 
       function type(d){
+        d.region = "World";
         d.population = +d.population;
         return d;
       }
