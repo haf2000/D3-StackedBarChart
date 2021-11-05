@@ -1,7 +1,4 @@
-,,maladie,maladie,maladie,maladie
-sexe,,femme,femme,homme,homme
-activite_physique,,Non,Oui,Non,Oui
-maladie,intervales_ages,,,,
+maladie,intervales_ages,femme_Non_active,femme_Oui_active,homme_Non_actif,homme_Oui_actif
 Asthmatique,<=18,0,1,1,0
 Asthmatique,18-25,2,0,0,1
 Asthmatique,25-45,0,2,0,1
