@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>pie</title>
+	<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<!-- Color scale -->
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+</head>
+<body>
+	<h1 style="text-align:center;">Visualisation du nombre de personnes (femmes/hommes) qui boivent une boisson alcholisée (ou non) et fument des produits tels que le tabac (ou non) par maladie (n'importe quel âge).</h1>
+<button onclick="update(data_diabete,'Diabete : ')">Diabete</button>
+<button onclick="update(data_asthme,'Asthme : ')">Asthme</button>
+<button onclick="update(data_tension,'Tension : ')">Tension</button> 
+<h3 id="titre">Diabete : </h3>
+
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+<script>
+
+// set the dimensions and margins of the graph
+var width = 1200
+    height = 450
+    margin = 60
+
+// The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+var radius = Math.min(width, height) / 2 - margin
+
+// append the svg object to the div called 'my_dataviz'
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+  .append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+// create 3 data_set
+var data = [
+  {
+    "maladie": "Asthmatique",
+    "Femme_NonA_NonF": "5",
+    "Femme_NonA_OuiF": "0",
+    "Femme_OuiA_NonF": "0",
+    "Femme_OuiA_OuiF": "0",
+    "Homme_NonA_NonF": "3",
+    "Homme_NonA_OuiF": "0",
+    "Homme_OuiA_NonF": "0",
+    "Homme_OuiA_OuiF": "0"
+  },
+  {
+    "maladie": "Diabete",
+    "Femme_NonA_NonF": "15",
+    "Femme_NonA_OuiF": "0",
+    "Femme_OuiA_NonF": "0",
+    "Femme_OuiA_OuiF": "0",
+    "Homme_NonA_NonF": "13",
+    "Homme_NonA_OuiF": "1",
+    "Homme_OuiA_NonF": "0",
+    "Homme_OuiA_OuiF": "1"
+  },
+  {
+    "maladie": "Tension",
+    "Femme_NonA_NonF": "14",
+    "Femme_NonA_OuiF": "0",
+    "Femme_OuiA_NonF": "0",
+    "Femme_OuiA_OuiF": "0",
+    "Homme_NonA_NonF": "10",
+    "Homme_NonA_OuiF": "1",
+    "Homme_OuiA_NonF": "3",
+    "Homme_OuiA_OuiF": "1"
+  }
+];
+var data_asthme = {Femme_NonA_NonF:5 , Femme_NonA_OuiF: 0, Femme_OuiA_NonF:0, Femme_OuiA_OuiF:0, Homme_NonA_NonF : 3,Homme_NonA_OuiF : 0 ,Homme_OuiA_NonF : 0 ,Homme_OuiA_OuiF :  0};
+var data_tension = {Femme_NonA_NonF:14 , Femme_NonA_OuiF: 0, Femme_OuiA_NonF:0, Femme_OuiA_OuiF:0, Homme_NonA_NonF : 10,Homme_NonA_OuiF : 1 ,Homme_OuiA_NonF : 3 ,Homme_OuiA_OuiF :  1};
+var data_diabete = {Femme_NonA_NonF:15 , Femme_NonA_OuiF: 0, Femme_OuiA_NonF:0, Femme_OuiA_OuiF:0, Homme_NonA_NonF : 13,Homme_NonA_OuiF : 1 ,Homme_OuiA_NonF : 0 ,Homme_OuiA_OuiF :  1};
+
+
+
+
+// set the color scale
+var color = d3.scaleOrdinal()
+  .domain(["Femme_NonA_NonF","Femme_NonA_OuiF","Femme_OuiA_NonF","Femme_OuiA_OuiF","Homme_NonA_NonF","Homme_NonA_OuiF","Homme_OuiA_NonF","Homme_OuiA_OuiF"])
+  .range(d3.schemeDark2);
+
+
+
+// Handmade legend
+svg.append("circle").attr("cx",200).attr("cy",-60).attr("r", 6).style("fill", d3.schemeDark2[0])
+svg.append("circle").attr("cx",200).attr("cy",-30).attr("r", 6).style("fill", d3.schemeDark2[1])
+svg.append("circle").attr("cx",200).attr("cy",0).attr("r", 6).style("fill", d3.schemeDark2[2])
+svg.append("circle").attr("cx",200).attr("cy",30).attr("r", 6).style("fill", d3.schemeDark2[3])
+svg.append("circle").attr("cx",200).attr("cy",60).attr("r", 6).style("fill", d3.schemeDark2[4])
+svg.append("circle").attr("cx",200).attr("cy",90).attr("r", 6).style("fill", d3.schemeDark2[5])
+svg.append("circle").attr("cx",200).attr("cy",120).attr("r", 6).style("fill", d3.schemeDark2[6])
+svg.append("circle").attr("cx",200).attr("cy",150).attr("r", 6).style("fill", d3.schemeDark2[7])
+
+
+
+svg.append("text").attr("x", 220).attr("y", -60).text("femme qui ne boivent pas et ne fumment pas").style("font-size", "15px").attr("alignment-baseline","middle")
+svg.append("text").attr("x", 220).attr("y", -30).text("femme qui ne boivent pas et fumment").style("font-size", "15px").attr("alignment-baseline","middle")
+svg.append("text").attr("x", 220).attr("y", 0).text("femme qui boivent et ne fumment pas").style("font-size", "15px").attr("alignment-baseline","middle")
+svg.append("text").attr("x", 220).attr("y", 30).text("femme qui boivent et fumment").style("font-size", "15px").attr("alignment-baseline","middle")
+
+svg.append("text").attr("x", 220).attr("y", 60).text("homme qui ne boivent pas et ne fumment pas").style("font-size", "15px").attr("alignment-baseline","middle")
+svg.append("text").attr("x", 220).attr("y", 90).text("homme qui ne boivent pas et fumment").style("font-size", "15px").attr("alignment-baseline","middle")
+svg.append("text").attr("x", 220).attr("y", 120).text("homme qui boivent et ne fumment pas").style("font-size", "15px").attr("alignment-baseline","middle")
+svg.append("text").attr("x", 220).attr("y", 150).text("homme qui boivent et fumment").style("font-size", "15px").attr("alignment-baseline","middle")
+
+// A function that create / update the plot for a given variable:
+function update(data,text) {
+
+document.getElementById('titre').innerHTML=text;
+  // Compute the position of each group on the pie:
+  var pie = d3.pie()
+    .value(function(d) {return d.value; })
+    .sort(function(a, b) { return d3.ascending(a.key, b.key);} ) // This make sure that group order remains the same in the pie chart
+  var data_ready = pie(d3.entries(data))
+
+  // map to data
+  var u = svg.selectAll("path")
+    .data(data_ready)
+
+  // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+  u
+    .enter()
+    .append('path')
+    .merge(u)
+    .transition()
+    .duration(1000)
+    .attr('d', d3.arc()
+      .innerRadius(0)
+      .outerRadius(radius)
+    )
+    .attr('fill', function(d){ return(color(d.data.key)) })
+    .attr("stroke", "white")
+    .style("stroke-width", "2px")
+    .style("opacity", 1)
+
+  // remove the group that is not present anymore
+  u
+    .exit()
+    .remove()
+
+
+}
+
+// Initialize the plot with the first dataset
+update(data_diabete,"Diabete : ");
+
+
+
+</script>
+</body>
+</html>
