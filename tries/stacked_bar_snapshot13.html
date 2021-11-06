@@ -11,21 +11,20 @@
         function render(data){
         
         var nested = d3.nest()
-          .key(function (d){ return d.country; })
-          .key(function (d){ return d.religion; })
+          .key(function (d){ return d.maladie; })
           .entries(data);
 
         d3.select("body").append("pre")
           .text(JSON.stringify(nested, null, 2));
       }
 
-      function type(d){
-        d.population = +d.population;
-        return d;
-      }
+      // function type(d){
+      //   d.population = +d.population;
+      //   return d;
+      // }
 
 
-      d3.csv("https://raw.githubusercontent.com/curran/screencasts/gh-pages/splittingCharts/examples/code/snapshot13/religionByCountryTop5.csv", type, render);
+      d3.csv("https://raw.githubusercontent.com/haf2000/D3-StackedBarChart/main/Projet%20final/Dataset_for_diagram_1_second_try%20(1).csv",  render);
 
     </script>
   </body>

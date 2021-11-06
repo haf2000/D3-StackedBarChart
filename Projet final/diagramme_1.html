@@ -48,7 +48,7 @@
       var barPadding = 0.2;
 
       var xColumn = "intervales_ages";
-      var yColumn = "population";
+      var yColumn = "Nombre de personnes";
       var colorColumn = "religion";
       var layerColumn = colorColumn;
       
@@ -222,14 +222,12 @@
       }
 
       function type(d){
-        d.intervales_ages = +d.intervales_ages;
+        d.population = +d.population;
         return d;
       }
 
-      var data;
-              d3.csv("https://raw.githubusercontent.com/haf2000/D3-StackedBarChart/main/Projet%20final/Dataset_for_diagram_1.csv", type, render);
+      d3.csv("https://raw.githubusercontent.com/haf2000/D3-StackedBarChart/main/Projet%20final/Dataset_for_diagram_1_second_try%20(1).csv", type, render);    
 
-      render(data);
     </script>
   </body>
 </html>

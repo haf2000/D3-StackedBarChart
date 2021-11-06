@@ -1,0 +1,21 @@
+maladie,intervales_ages,femme_Non_active,femme_Oui_active,homme_Non_actif,homme_Oui_actif
+Asthmatique,<=18,0,1,1,0
+Asthmatique,18-25,2,0,0,1
+Asthmatique,25-45,0,2,0,1
+Asthmatique,45-70,0,0,0,0
+Cardiaque,<=18,0,0,0,0
+Cardiaque,18-25,0,0,0,0
+Cardiaque,25-45,1,0,0,0
+Cardiaque,45-70,0,0,0,0
+Diab�te,<=18,2,1,0,0
+Diab�te,18-25,3,2,7,1
+Diab�te,25-45,3,3,3,3
+Diab�te,45-70,0,1,1,0
+Insuffisance r�nale,<=18,0,0,0,0
+Insuffisance r�nale,18-25,0,1,0,0
+Insuffisance r�nale,25-45,0,0,0,0
+Insuffisance r�nale,45-70,0,0,0,0
+Tension,<=18,0,1,1,0
+Tension,18-25,6,4,4,4
+Tension,25-45,2,1,4,2
+Tension,45-70,0,0,0,0
