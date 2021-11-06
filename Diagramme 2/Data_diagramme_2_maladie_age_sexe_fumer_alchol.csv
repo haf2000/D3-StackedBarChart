@@ -1,0 +1,21 @@
+maladie,intervales_ages,Femme_NonA_NonF,Femme_NonA_OuiF,Femme_OuiA_NonF,Femme_OuiA_OuiF,Homme_NonA_NonF,Homme_NonA_OuiF,Homme_OuiA_NonF,Homme_OuiA_OuiF
+Asthmatique,<=18,1,0,0,0,1,0,0,0
+Asthmatique,18-25,2,0,0,0,1,0,0,0
+Asthmatique,25-45,2,0,0,0,1,0,0,0
+Asthmatique,45-70,0,0,0,0,0,0,0,0
+Cardiaque,<=18,0,0,0,0,0,0,0,0
+Cardiaque,18-25,0,0,0,0,0,0,0,0
+Cardiaque,25-45,1,0,0,0,0,0,0,0
+Cardiaque,45-70,0,0,0,0,0,0,0,0
+Diabete,<=18,3,0,0,0,0,0,0,0
+Diabete,18-25,5,0,0,0,8,0,0,0
+Diabete,25-45,6,0,0,0,4,1,0,1
+Diabete,45-70,1,0,0,0,1,0,0,0
+Insuffisance renale,<=18,0,0,0,0,0,0,0,0
+Insuffisance renale,18-25,1,0,0,0,0,0,0,0
+Insuffisance renale,25-45,0,0,0,0,0,0,0,0
+Insuffisance renale,45-70,0,0,0,0,0,0,0,0
+Tension,<=18,1,0,0,0,1,0,0,0
+Tension,18-25,10,0,0,0,7,1,0,0
+Tension,25-45,3,0,0,0,2,0,3,1
+Tension,45-70,0,0,0,0,0,0,0,0
